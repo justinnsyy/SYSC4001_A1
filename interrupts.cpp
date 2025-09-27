@@ -1,7 +1,7 @@
 /**
  *
  * @file interrupts.cpp
- * @author Sasisekhar Govind
+ * @author Justin Sy
  *
  */
 
@@ -19,7 +19,8 @@ int main(int argc, char** argv) {
     std::string execution;  //!< string to accumulate the execution output
 
     /******************ADD YOUR VARIABLES HERE*************************/
-
+    int x = 0;
+    int y = 0;
 
 
     /******************************************************************/
