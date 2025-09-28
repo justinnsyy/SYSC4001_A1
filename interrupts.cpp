@@ -21,6 +21,8 @@ int main(int argc, char** argv) {
     /******************ADD YOUR VARIABLES HERE*************************/
     int x = 0;
     int y = 0;
+    int test = 10;
+    //testing commit
 
 
     /******************************************************************/
