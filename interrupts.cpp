@@ -1,7 +1,7 @@
 /**
  *
  * @file interrupts.cpp
- * @author Sasisekhar Govind
+ * @author Justin Sy
  *
  */
 
@@ -19,7 +19,8 @@ int main(int argc, char** argv) {
     std::string execution;  //!< string to accumulate the execution output
 
     /******************ADD YOUR VARIABLES HERE*************************/
-
+    int vectorTable[VECTOR_SIZE];
+    int currentTime = 0;
 
 
     /******************************************************************/
@@ -29,7 +30,18 @@ int main(int argc, char** argv) {
         auto [activity, duration_intr] = parse_trace(trace);
 
         /******************ADD YOUR SIMULATION CODE HERE*************************/
+        if (activity == "CPU") {
 
+        }
+        else if (activity == "SYSCALL") {
+            return 0;
+        }
+        else if (activity == "END_IO") {
+            return 0;
+        }
+        else{
+            return 0;
+        }
 
 
         /************************************************************************/
