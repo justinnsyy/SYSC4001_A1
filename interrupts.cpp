@@ -23,6 +23,7 @@ int main(int argc, char** argv) {
     int currentTime = 0;
     int context_save_time = 10;
     int isr_activity_time = 40;
+    const int iret_ms = 1;
 
 
     /******************************************************************/
@@ -49,13 +50,19 @@ int main(int argc, char** argv) {
             execution += interrupt_exec_log;
             currentTime = new_time;
 
-            //isr body            
+            //isr body
+            execution += std::to_string(currentTime) + ", " + std::to_string(isr_activity_time) + ", execution ISR (syscall to device " + std::to_string(device_num)
+            + ")\n";
+            currentTime += isr_activity_time;
+
+            execution += std::to_string(currentTime) + ", " + std::to_string(iret_ms) + ", IRET\n";
+            currentTime += iret_ms;
+
         }
         else if (activity == "END_IO") {
             return 0;
         }
         else{
-            return 0;
         }
 
 
