@@ -34,20 +34,20 @@ int main(int argc, char** argv) {
         /******************ADD YOUR SIMULATION CODE HERE*************************/
         if (activity == "CPU") 
         {
-            execution += std::to_string(current_time) + ", " + std::to_string(duration_intr) + 
+            execution += std::to_string(currentTime) + ", " + std::to_string(duration_intr) + 
                          ", CPU burst\n";
 
-            current_time += duration_intr;
+            currentTime += duration_intr;
         }
         else if (activity == "SYSCALL") 
         {
             int device_num = duration_intr;
 
             auto [interrupt_exec_log, new_time] = intr_boilerplate
-                                            (current_time, device_num, context_save_time, vectors);
+                                            (currentTime, device_num, context_save_time, vectors);
             
             execution += interrupt_exec_log;
-            current_time = new_time;
+            currentTime = new_time;
 
             //isr body            
         }
