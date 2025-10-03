@@ -2,7 +2,7 @@
  *
  * @file interrupts.cpp
  * @author Justin Sy
- *
+ * @author Alex Rusu
  */
 
 #include<interrupts.hpp>
@@ -30,8 +30,12 @@ int main(int argc, char** argv) {
         auto [activity, duration_intr] = parse_trace(trace);
 
         /******************ADD YOUR SIMULATION CODE HERE*************************/
-        if (activity == "CPU") {
+        if (activity == "CPU") 
+        {
+            execution += std::to_string(current_time) + ", " + std::to_string(duration_intr) + 
+                         ", CPU burst\n";
 
+            current_time += duration_intr;
         }
         else if (activity == "SYSCALL") {
             return 0;
