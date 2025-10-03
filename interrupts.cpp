@@ -21,6 +21,8 @@ int main(int argc, char** argv) {
     /******************ADD YOUR VARIABLES HERE*************************/
     int vectorTable[VECTOR_SIZE];
     int currentTime = 0;
+    int context_save_time = 10;
+    int isr_activity_time = 40;
 
 
     /******************************************************************/
@@ -37,8 +39,17 @@ int main(int argc, char** argv) {
 
             current_time += duration_intr;
         }
-        else if (activity == "SYSCALL") {
-            return 0;
+        else if (activity == "SYSCALL") 
+        {
+            int device_num = duration_intr;
+
+            auto [interrupt_exec_log, new_time] = intr_boilerplate
+                                            (current_time, device_num, context_save_time, vectors);
+            
+            execution += interrupt_exec_log;
+            current_time = new_time;
+
+            //isr body            
         }
         else if (activity == "END_IO") {
             return 0;
