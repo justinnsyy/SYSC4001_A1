@@ -1,0 +1,249 @@
+0, 72, CPU burst
+72, 0, start I/O on device 5 (will be ready at 283 ms)
+72, 1, switch to kernel mode
+73, 10, context saved
+83, 1, find vector 5 in memory position 0x000A
+84, 1, load address 0X048B into the PC
+85, 40, execution ISR (syscall to device 5)
+125, 1, IRET
+126, 10, context restored
+136, 74, CPU burst
+210, 73, CPU idle waiting for end of I/O 5
+283, 0, end of I/O 5: interrupt
+283, 1, switch to kernel mode
+284, 10, context saved
+294, 1, find vector 5 in memory position 0x000A
+295, 1, load address 0X048B into the PC
+296, 40, execution ISR (end-of-I/O 5)
+336, 1, IRET
+337, 10, context restored
+347, 81, CPU burst
+428, 0, start I/O on device 0 (will be ready at 538 ms)
+428, 1, switch to kernel mode
+429, 10, context saved
+439, 1, find vector 0 in memory position 0x0000
+440, 1, load address 0X01E3 into the PC
+441, 40, execution ISR (syscall to device 0)
+481, 1, IRET
+482, 10, context restored
+492, 76, CPU burst
+568, 0, end of I/O 0: interrupt
+568, 1, switch to kernel mode
+569, 10, context saved
+579, 1, find vector 0 in memory position 0x0000
+580, 1, load address 0X01E3 into the PC
+581, 40, execution ISR (end-of-I/O 0)
+621, 1, IRET
+622, 10, context restored
+632, 67, CPU burst
+699, 24, CPU burst
+723, 0, start I/O on device 15 (will be ready at 791 ms)
+723, 1, switch to kernel mode
+724, 10, context saved
+734, 1, find vector 15 in memory position 0x001E
+735, 1, load address 0X0584 into the PC
+736, 40, execution ISR (syscall to device 15)
+776, 1, IRET
+777, 10, context restored
+787, 70, CPU burst
+857, 0, end of I/O 15: interrupt
+857, 1, switch to kernel mode
+858, 10, context saved
+868, 1, find vector 15 in memory position 0x001E
+869, 1, load address 0X0584 into the PC
+870, 40, execution ISR (end-of-I/O 15)
+910, 1, IRET
+911, 10, context restored
+921, 54, CPU burst
+975, 0, start I/O on device 3 (will be ready at 1275 ms)
+975, 1, switch to kernel mode
+976, 10, context saved
+986, 1, find vector 3 in memory position 0x0006
+987, 1, load address 0X042B into the PC
+988, 40, execution ISR (syscall to device 3)
+1028, 1, IRET
+1029, 10, context restored
+1039, 26, CPU burst
+1065, 210, CPU idle waiting for end of I/O 3
+1275, 0, end of I/O 3: interrupt
+1275, 1, switch to kernel mode
+1276, 10, context saved
+1286, 1, find vector 3 in memory position 0x0006
+1287, 1, load address 0X042B into the PC
+1288, 40, execution ISR (end-of-I/O 3)
+1328, 1, IRET
+1329, 10, context restored
+1339, 73, CPU burst
+1412, 0, start I/O on device 8 (will be ready at 2412 ms)
+1412, 1, switch to kernel mode
+1413, 10, context saved
+1423, 1, find vector 8 in memory position 0x0010
+1424, 1, load address 0X06EF into the PC
+1425, 40, execution ISR (syscall to device 8)
+1465, 1, IRET
+1466, 10, context restored
+1476, 66, CPU burst
+1542, 870, CPU idle waiting for end of I/O 8
+2412, 0, end of I/O 8: interrupt
+2412, 1, switch to kernel mode
+2413, 10, context saved
+2423, 1, find vector 8 in memory position 0x0010
+2424, 1, load address 0X06EF into the PC
+2425, 40, execution ISR (end-of-I/O 8)
+2465, 1, IRET
+2466, 10, context restored
+2476, 30, CPU burst
+2506, 91, CPU burst
+2597, 0, start I/O on device 17 (will be ready at 2832 ms)
+2597, 1, switch to kernel mode
+2598, 10, context saved
+2608, 1, find vector 17 in memory position 0x0022
+2609, 1, load address 0X05B3 into the PC
+2610, 40, execution ISR (syscall to device 17)
+2650, 1, IRET
+2651, 10, context restored
+2661, 45, CPU burst
+2706, 126, CPU idle waiting for end of I/O 17
+2832, 0, end of I/O 17: interrupt
+2832, 1, switch to kernel mode
+2833, 10, context saved
+2843, 1, find vector 17 in memory position 0x0022
+2844, 1, load address 0X05B3 into the PC
+2845, 40, execution ISR (end-of-I/O 17)
+2885, 1, IRET
+2886, 10, context restored
+2896, 66, CPU burst
+2962, 0, start I/O on device 15 (will be ready at 3030 ms)
+2962, 1, switch to kernel mode
+2963, 10, context saved
+2973, 1, find vector 15 in memory position 0x001E
+2974, 1, load address 0X0584 into the PC
+2975, 40, execution ISR (syscall to device 15)
+3015, 1, IRET
+3016, 10, context restored
+3026, 72, CPU burst
+3098, 0, end of I/O 15: interrupt
+3098, 1, switch to kernel mode
+3099, 10, context saved
+3109, 1, find vector 15 in memory position 0x001E
+3110, 1, load address 0X0584 into the PC
+3111, 40, execution ISR (end-of-I/O 15)
+3151, 1, IRET
+3152, 10, context restored
+3162, 46, CPU burst
+3208, 84, CPU burst
+3292, 0, start I/O on device 9 (will be ready at 3448 ms)
+3292, 1, switch to kernel mode
+3293, 10, context saved
+3303, 1, find vector 9 in memory position 0x0012
+3304, 1, load address 0X036C into the PC
+3305, 40, execution ISR (syscall to device 9)
+3345, 1, IRET
+3346, 10, context restored
+3356, 68, CPU burst
+3424, 24, CPU idle waiting for end of I/O 9
+3448, 0, end of I/O 9: interrupt
+3448, 1, switch to kernel mode
+3449, 10, context saved
+3459, 1, find vector 9 in memory position 0x0012
+3460, 1, load address 0X036C into the PC
+3461, 40, execution ISR (end-of-I/O 9)
+3501, 1, IRET
+3502, 10, context restored
+3512, 84, CPU burst
+3596, 0, start I/O on device 15 (will be ready at 3664 ms)
+3596, 1, switch to kernel mode
+3597, 10, context saved
+3607, 1, find vector 15 in memory position 0x001E
+3608, 1, load address 0X0584 into the PC
+3609, 40, execution ISR (syscall to device 15)
+3649, 1, IRET
+3650, 10, context restored
+3660, 51, CPU burst
+3711, 0, end of I/O 15: interrupt
+3711, 1, switch to kernel mode
+3712, 10, context saved
+3722, 1, find vector 15 in memory position 0x001E
+3723, 1, load address 0X0584 into the PC
+3724, 40, execution ISR (end-of-I/O 15)
+3764, 1, IRET
+3765, 10, context restored
+3775, 45, CPU burst
+3820, 37, CPU burst
+3857, 0, start I/O on device 2 (will be ready at 4007 ms)
+3857, 1, switch to kernel mode
+3858, 10, context saved
+3868, 1, find vector 2 in memory position 0x0004
+3869, 1, load address 0X0695 into the PC
+3870, 40, execution ISR (syscall to device 2)
+3910, 1, IRET
+3911, 10, context restored
+3921, 51, CPU burst
+3972, 35, CPU idle waiting for end of I/O 2
+4007, 0, end of I/O 2: interrupt
+4007, 1, switch to kernel mode
+4008, 10, context saved
+4018, 1, find vector 2 in memory position 0x0004
+4019, 1, load address 0X0695 into the PC
+4020, 40, execution ISR (end-of-I/O 2)
+4060, 1, IRET
+4061, 10, context restored
+4071, 62, CPU burst
+4133, 0, start I/O on device 19 (will be ready at 4785 ms)
+4133, 1, switch to kernel mode
+4134, 10, context saved
+4144, 1, find vector 19 in memory position 0x0026
+4145, 1, load address 0X0765 into the PC
+4146, 40, execution ISR (syscall to device 19)
+4186, 1, IRET
+4187, 10, context restored
+4197, 55, CPU burst
+4252, 533, CPU idle waiting for end of I/O 19
+4785, 0, end of I/O 19: interrupt
+4785, 1, switch to kernel mode
+4786, 10, context saved
+4796, 1, find vector 19 in memory position 0x0026
+4797, 1, load address 0X0765 into the PC
+4798, 40, execution ISR (end-of-I/O 19)
+4838, 1, IRET
+4839, 10, context restored
+4849, 48, CPU burst
+4897, 0, start I/O on device 7 (will be ready at 5049 ms)
+4897, 1, switch to kernel mode
+4898, 10, context saved
+4908, 1, find vector 7 in memory position 0x000E
+4909, 1, load address 0X00BD into the PC
+4910, 40, execution ISR (syscall to device 7)
+4950, 1, IRET
+4951, 10, context restored
+4961, 69, CPU burst
+5030, 19, CPU idle waiting for end of I/O 7
+5049, 0, end of I/O 7: interrupt
+5049, 1, switch to kernel mode
+5050, 10, context saved
+5060, 1, find vector 7 in memory position 0x000E
+5061, 1, load address 0X00BD into the PC
+5062, 40, execution ISR (end-of-I/O 7)
+5102, 1, IRET
+5103, 10, context restored
+5113, 46, CPU burst
+5159, 60, CPU burst
+5219, 0, start I/O on device 7 (will be ready at 5371 ms)
+5219, 1, switch to kernel mode
+5220, 10, context saved
+5230, 1, find vector 7 in memory position 0x000E
+5231, 1, load address 0X00BD into the PC
+5232, 40, execution ISR (syscall to device 7)
+5272, 1, IRET
+5273, 10, context restored
+5283, 48, CPU burst
+5331, 40, CPU idle waiting for end of I/O 7
+5371, 0, end of I/O 7: interrupt
+5371, 1, switch to kernel mode
+5372, 10, context saved
+5382, 1, find vector 7 in memory position 0x000E
+5383, 1, load address 0X00BD into the PC
+5384, 40, execution ISR (end-of-I/O 7)
+5424, 1, IRET
+5425, 10, context restored
+5435, 30, CPU burst
