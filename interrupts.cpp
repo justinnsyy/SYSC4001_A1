@@ -6,6 +6,11 @@
  */
 
 #include<interrupts.hpp>
+#include <string>
+#include <cstring>
+#include <cstdlib>
+#include <cstdio>
+#include <vector>
 
 int main(int argc, char** argv) {
 
@@ -24,6 +29,7 @@ int main(int argc, char** argv) {
     int context_save_time = 10;
     int isr_activity_time = 40;
     const int iret_ms = 1;
+    std::vector<int> io_ready_at(delays.size(), -1);
 
 
     /******************************************************************/
@@ -40,30 +46,71 @@ int main(int argc, char** argv) {
 
             currentTime += duration_intr;
         }
-        else if (activity == "SYSCALL") 
+        else if (std::strcmp(activity.c_str(), "SYSCALL") == 0 || std::strcmp(activity.c_str(), "END_IO")  == 0)
         {
-            int device_num = duration_intr;
+            if (activity == "SYSCALL" || std::strcmp(activity.c_str(), "SYSCALL") == 0) {
+                int device_num = duration_intr;
+                int dly = (device_num >= 0 && device_num < (int)delays.size()) ? delays[device_num] : 0;
+                io_ready_at[device_num] = currentTime + dly;
+                execution += std::to_string(currentTime) + ", 0, start I/O on device "
+                + std::to_string(device_num) + " (will be ready at "
+                + std::to_string(io_ready_at[device_num]) + " ms)\n";
+                
+                //Kernel steps
+                auto [interrupt_exec_log, new_time] = intr_boilerplate
+                                                (currentTime, device_num, context_save_time, vectors);
+                
+                execution += interrupt_exec_log;
+                currentTime = new_time;
 
-            auto [interrupt_exec_log, new_time] = intr_boilerplate
-                                            (currentTime, device_num, context_save_time, vectors);
-            
-            execution += interrupt_exec_log;
-            currentTime = new_time;
+                //isr body and IRET
+                execution += std::to_string(currentTime) + ", " + std::to_string(isr_activity_time)
+                        + ", execution ISR (syscall to device " + std::to_string(device_num) + ")\n";
+                currentTime += isr_activity_time;
 
-            //isr body
-            execution += std::to_string(currentTime) + ", " + std::to_string(isr_activity_time) + ", execution ISR (syscall to device " + std::to_string(device_num)
-            + ")\n";
-            currentTime += isr_activity_time;
+                execution += std::to_string(currentTime) + ", " + std::to_string(iret_ms) + ", IRET\n";
+                currentTime += iret_ms;
 
-            execution += std::to_string(currentTime) + ", " + std::to_string(iret_ms) + ", IRET\n";
-            currentTime += iret_ms;
+                execution += std::to_string(currentTime) + ", " + std::to_string(context_save_time) + ", context restored\n";
+                currentTime += context_save_time;
+            }
+            else if (activity == "END_IO") {
+                int device_num = duration_intr;
 
-        }
-        else if (activity == "END_IO") {
-            return 0;
-        }
-        else{
-        }
+                // If not yet finished, CPU idles until recorded completion time
+                int ready_at = (device_num >= 0 && device_num < (int)io_ready_at.size())
+                            ? io_ready_at[device_num] : currentTime;
+                if (currentTime < ready_at) {
+                    execution += std::to_string(currentTime) + ", " + std::to_string(ready_at - currentTime)
+                            + ", CPU idle waiting for end of I/O " + std::to_string(device_num) + "\n";
+                    currentTime = ready_at;
+                }
+
+                // Completion interrupt
+                execution += std::to_string(currentTime) + ", 0, end of I/O "
+                        + std::to_string(device_num) + ": interrupt\n";
+
+                // Kernel Steps
+                auto [interrupt_exec_log, new_time] =
+                    intr_boilerplate(currentTime, device_num, context_save_time, vectors);
+                execution += interrupt_exec_log;
+                currentTime = new_time;
+
+                // ISR body and IRET and restore
+                execution += std::to_string(currentTime) + ", " + std::to_string(isr_activity_time)
+                        + ", execution ISR (end-of-I/O " + std::to_string(device_num) + ")\n";
+                currentTime += isr_activity_time;
+
+                execution += std::to_string(currentTime) + ", " + std::to_string(iret_ms) + ", IRET\n";
+                currentTime += iret_ms;
+
+                execution += std::to_string(currentTime) + ", " + std::to_string(context_save_time) + ", context restored\n";
+                currentTime += context_save_time;
+
+                // Clear pending I/O
+                if (device_num >= 0 && device_num < (int)io_ready_at.size()) io_ready_at[device_num] = -1;
+            }
+        } 
 
 
         /************************************************************************/
