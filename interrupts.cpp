@@ -30,8 +30,7 @@ int main(int argc, char** argv) {
     int isr_activity_time = 40;
     const int iret_ms = 1;
     std::vector<int> io_ready_at(delays.size(), -1);
-
-
+    
     /******************************************************************/
 
     //parse each line of the input trace file
@@ -50,8 +49,10 @@ int main(int argc, char** argv) {
         {
             if (activity == "SYSCALL" || std::strcmp(activity.c_str(), "SYSCALL") == 0) {
                 int device_num = duration_intr;
+
                 int dly = (device_num >= 0 && device_num < (int)delays.size()) ? delays[device_num] : 0;
                 io_ready_at[device_num] = currentTime + dly;
+
                 execution += std::to_string(currentTime) + ", 0, start I/O on device "
                 + std::to_string(device_num) + " (will be ready at "
                 + std::to_string(io_ready_at[device_num]) + " ms)\n";
@@ -63,7 +64,7 @@ int main(int argc, char** argv) {
                 execution += interrupt_exec_log;
                 currentTime = new_time;
 
-                //isr body and IRET
+                //ISR body and IRET and restore
                 execution += std::to_string(currentTime) + ", " + std::to_string(isr_activity_time)
                         + ", execution ISR (syscall to device " + std::to_string(device_num) + ")\n";
                 currentTime += isr_activity_time;
@@ -78,8 +79,8 @@ int main(int argc, char** argv) {
                 int device_num = duration_intr;
 
                 // If not yet finished, CPU idles until recorded completion time
-                int ready_at = (device_num >= 0 && device_num < (int)io_ready_at.size())
-                            ? io_ready_at[device_num] : currentTime;
+                int ready_at = (device_num >= 0 && device_num < (int)io_ready_at.size()) ? io_ready_at[device_num] : currentTime;
+
                 if (currentTime < ready_at) {
                     execution += std::to_string(currentTime) + ", " + std::to_string(ready_at - currentTime)
                             + ", CPU idle waiting for end of I/O " + std::to_string(device_num) + "\n";
